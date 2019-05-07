@@ -1,15 +1,16 @@
 package implementation;
 
 import interfaces.ReplicaServerClientInterface;
+import interfaces.ReplicaServerMasterInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-public class ReplicaServer implements ReplicaServerClientInterface {
+public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServerMasterInterface {
 
     @Override
-    public AckMsg write(long txnID, long msgSeqNum, FileContent data) throws RemoteException, IOException {
+    public WriteMsg write(long txnID, long msgSeqNum, FileContent data) throws RemoteException, IOException {
         return null;
     }
 
@@ -25,6 +26,11 @@ public class ReplicaServer implements ReplicaServerClientInterface {
 
     @Override
     public boolean abort(long txnID) throws RemoteException {
+        return false;
+    }
+
+    @Override
+    public boolean isAlive() throws RemoteException{
         return false;
     }
 }
