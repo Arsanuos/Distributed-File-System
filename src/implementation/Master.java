@@ -14,6 +14,7 @@ public class Master implements MasterServerClientInterface {
     private Map<String, List<ReplicaLoc>> replicaLocations;
     private List<ReplicaLoc> replicaLocs;
     private List<ReplicaServer> replicaServers;
+    private long txID;
 
     public Master(List<ReplicaServer> replicaServers, List<ReplicaLoc> replicaLocs){
 
@@ -21,6 +22,7 @@ public class Master implements MasterServerClientInterface {
         this.replicaServers = replicaServers;
         primaryReplica = new HashMap<>();
         replicaLocations = new HashMap<>();
+        this.txID = 0;
 
         TimerTask heartBeat = new TimerTask() {
             @Override
@@ -41,7 +43,10 @@ public class Master implements MasterServerClientInterface {
     }
 
     @Override
-    public ReplicaLoc[] read(String fileName) throws FileNotFoundException, IOException, RemoteException {
+    public ReplicaLoc[] read(String fileName) throws IOException, RemoteException {
+        if(!this.replicaLocations.containsKey(fileName)){
+            throw new FileNotFoundException();
+        }
         List<ReplicaLoc> locs = this.replicaLocations.get(fileName);
         ReplicaLoc[] locations = locs.toArray(new ReplicaLoc[locs.size()]);
         return locations;
@@ -49,6 +54,7 @@ public class Master implements MasterServerClientInterface {
 
     @Override
     public WriteMsg write(FileContent data) throws RemoteException, IOException {
+        // Replica must know the other replicas (How?).
         return null;
     }
 }

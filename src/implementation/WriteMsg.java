@@ -6,6 +6,12 @@ public class WriteMsg {
 	private  long timeStamp;
 	private ReplicaLoc loc;
 
+	public WriteMsg(long transactionId, long timeStamp, ReplicaLoc loc){
+		this.timeStamp = timeStamp;
+		this.transactionId = transactionId;
+		this.loc = loc;
+	}
+
 	public long getTransactionId() {
 		return transactionId;
 	}
