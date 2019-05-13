@@ -7,6 +7,7 @@ import interfaces.ReplicaServerMasterInterface;
 import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +27,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
     private Map<Integer, ReplicaReplicaInterface> current_stubs;
     private Map<Long, String> txn_filename;
     private ConcurrentMap<String, ReentrantReadWriteLock> lock_manager;
+    private final static int port = 8080;
 
     public ReplicaServer(int id, String addr){
         this.id = id;
@@ -36,10 +38,17 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         if(!file.exists()){
             file.mkdir();
         }
+
         txn_filename = new HashMap<>();
         slavesReplicas = new HashMap<>();
         current_stubs = new HashMap<>();
         lock_manager = new ConcurrentHashMap<>();
+
+        try {
+            registry = LocateRegistry.getRegistry(addr, port);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -108,12 +117,12 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         List<ReplicaReplicaInterface> slaves = slavesReplicas.get(filename);
 
         for (ReplicaReplicaInterface slave: slaves){
-            boolean done = slave.commit_data(filename, data);
+            boolean done = slave.reflect_data(filename, data);
             if (!done){
-                // error
+                // error, not handled yet
             }
         }
-        boolean primary_done = commit_data(filename, data);
+        boolean primary_done = reflect_data(filename, data);
 
         // unlock primary
         release_locks(filename);
@@ -171,7 +180,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
 
 
     @Override
-    public boolean commit_data(String filename, byte[] data) throws IOException {
+    public boolean reflect_data(String filename, byte[] data) throws IOException {
         // tell the slave to write their copy on the hard disk
         lock_manager.putIfAbsent(filename, new ReentrantReadWriteLock());
         ReentrantReadWriteLock lock = lock_manager.get(filename);
