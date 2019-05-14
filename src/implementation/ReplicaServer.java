@@ -125,11 +125,11 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         boolean primary_done = reflect_data(filename, data);
 
         // unlock primary
-        release_locks(filename);
+        release_file_locks(filename);
 
         // unlock slaves
         for(ReplicaReplicaInterface slave: slaves){
-            slave.release_locks(filename);
+            slave.release_file_locks(filename);
         }
         return true;
     }
@@ -191,7 +191,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
     }
 
     @Override
-    public boolean release_locks(String filename) {
+    public boolean release_file_locks(String filename) {
         // tell the slaves to release the locks of that file
         ReentrantReadWriteLock lock = lock_manager.get(filename);
         lock.writeLock().unlock();

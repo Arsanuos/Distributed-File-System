@@ -1,6 +1,8 @@
 package implementation;
 
-public class WriteMsg {
+import java.io.Serializable;
+
+public class WriteMsg implements Serializable {
 
 	private long transactionId;
 	private  long timeStamp;

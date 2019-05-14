@@ -21,8 +21,7 @@ public class Master implements MasterServerClientInterface {
     private long txID;
     private Registry registry;
 
-    private static final int  port = 8080;
-    private static final String addr = "localhost";
+
 
 
     public Master(List<ReplicaServer> replicaServers, List<ReplicaLoc> replicaLocs){
@@ -51,7 +50,7 @@ public class Master implements MasterServerClientInterface {
         timer.schedule(heartBeat, 10, 3000);
 
         try {
-            registry = LocateRegistry.getRegistry(addr, port);
+            registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

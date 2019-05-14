@@ -1,5 +1,6 @@
 package implementation;
 
+import interfaces.MasterServerClientInterface;
 import interfaces.ReplicaServerClientInterface;
 
 import java.io.IOException;
@@ -10,15 +11,15 @@ import java.util.Arrays;
 
 public class Client {
 
-    private Master master;
+    private MasterServerClientInterface master;
 
     public Client(){
         try {
             // Getting the registry
-            Registry registry = LocateRegistry.getRegistry(null);
+            Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
 
             // Looking up the registry for the remote object
-            this.master = (Master) registry.lookup("Master");
+            this.master = (MasterServerClientInterface) registry.lookup("Master");
 
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
@@ -48,7 +49,7 @@ public class Client {
         ReplicaLoc replicaLoc = msg.getLoc();
 
         //get the server itself.
-        Registry registry = LocateRegistry.getRegistry(null);
+        Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
         ReplicaServerClientInterface replicaServer = (ReplicaServerClientInterface) registry.lookup("Replica" + replicaLoc.getId());
 
         byte[] data = fileContent.getData();
