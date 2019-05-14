@@ -17,16 +17,14 @@ public class Master implements MasterServerClientInterface {
     private Map<String, ReplicaLoc> primaryReplica;
     private Map<String, List<ReplicaLoc>> replicaLocations;
     private List<ReplicaLoc> replicaLocs;
-    private List<ReplicaServerMasterInterface> replicaServers;
+    private List<ReplicaServer> replicaServers;
     private long txID;
+    private Registry registry;
 
 
 
-    public Master(){
 
-    }
-
-    public void add_replicas(List<ReplicaServerMasterInterface> replicaServers, List<ReplicaLoc> replicaLocs){
+    public Master(List<ReplicaServer> replicaServers, List<ReplicaLoc> replicaLocs){
 
         this.replicaLocs = replicaLocs;
         this.replicaServers = replicaServers;
@@ -39,7 +37,7 @@ public class Master implements MasterServerClientInterface {
             public void run() {
                 for(int i = 0 ;i < replicaServers.size(); i++){
                     try {
-                        ReplicaServerMasterInterface server = replicaServers.get(i);
+                        ReplicaServer server = replicaServers.get(i);
                         server.isAlive();
                     } catch (RemoteException e) {
                         replicaLocs.get(i).setAlive(false);
@@ -85,7 +83,7 @@ public class Master implements MasterServerClientInterface {
         List<ReplicaLoc> sampled_loc = replicaLocs;
         replicaLocations.put(data.getFileName(), sampled_loc);
         ReplicaLoc prime = sampled_loc.get(0);
-        ReplicaServerMasterInterface inter = replicaServers.get(prime.getId());
+        ReplicaServerMasterInterface inter = (ReplicaServerMasterInterface) registry.lookup("Replica"+prime.getId());
         inter.take_charge(data.getFileName(), sampled_loc);
         return write(data);
     }

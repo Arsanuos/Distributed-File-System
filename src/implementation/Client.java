@@ -13,7 +13,7 @@ public class Client {
 
     private MasterServerClientInterface master;
 
-    public Client(String addr, int port){
+    public Client(){
         try {
             // Getting the registry
             Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
