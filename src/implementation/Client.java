@@ -13,7 +13,7 @@ public class Client {
 
     private MasterServerClientInterface master;
 
-    public Client(){
+    public Client(String addr, int port){
         try {
             // Getting the registry
             Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
@@ -34,9 +34,8 @@ public class Client {
         ReplicaLoc replica = locations[0];
 
         //get the server itself.
-        Registry registry = LocateRegistry.getRegistry(null);
+        Registry registry = LocateRegistry.getRegistry(replica.getAddress());
         ReplicaServerClientInterface replicaServer = (ReplicaServerClientInterface) registry.lookup("Replica" + replica.getId());
-
 
         FileContent fileContent = replicaServer.read(fileName);
 
