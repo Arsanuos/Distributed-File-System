@@ -27,7 +27,6 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
     private Map<Integer, ReplicaReplicaInterface> current_stubs;
     private Map<Long, String> txn_filename;
     private ConcurrentMap<String, ReentrantReadWriteLock> lock_manager;
-    private final static int port = 8080;
 
     public ReplicaServer(int id, String addr){
         this.id = id;
@@ -45,7 +44,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         lock_manager = new ConcurrentHashMap<>();
 
         try {
-            registry = LocateRegistry.getRegistry(addr, port);
+            registry = LocateRegistry.getRegistry(addr, Configuration.REG_PORT);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -74,7 +73,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         ReentrantReadWriteLock lock = lock_manager.get(fileName);
 
         lock.readLock().lock();
-        byte[] content = FileHandler.read(fileName);
+        byte[] content = FileHandler.read(dir + File.separator + fileName);
         lock.readLock().unlock();
 
         return new FileContent(fileName, content);
@@ -186,7 +185,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
         ReentrantReadWriteLock lock = lock_manager.get(filename);
 
         lock.writeLock().lock(); // don't release lock here .. making sure coming reads can't proceed
-        FileHandler.write(filename, data);
+        FileHandler.write(dir + File.separator + filename, data);
         return true;
     }
 

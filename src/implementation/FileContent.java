@@ -7,8 +7,9 @@ public class FileContent implements Serializable {
     private String fileName;
     private byte[] data;
 
-    public FileContent(){
-
+    public FileContent(String fileName){
+        data = new byte[0];
+        this.fileName = fileName;
     }
 
     public FileContent(String fileName, byte[] data){

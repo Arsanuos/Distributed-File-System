@@ -34,7 +34,7 @@ public class Client {
         ReplicaLoc replica = locations[0];
 
         //get the server itself.
-        Registry registry = LocateRegistry.getRegistry(replica.getAddress());
+        Registry registry = LocateRegistry.getRegistry(replica.getAddress(), Configuration.REG_PORT);
         ReplicaServerClientInterface replicaServer = (ReplicaServerClientInterface) registry.lookup("Replica" + replica.getId());
 
         FileContent fileContent = replicaServer.read(fileName);
@@ -53,7 +53,7 @@ public class Client {
 
         byte[] data = fileContent.getData();
         int len = (int) Math.floor(1.0 * fileContent.getData().length/Configuration.CHUNK_SIZE);
-        FileContent sent = new FileContent();
+        FileContent sent = new FileContent(fileContent.getFileName());
 
         for(int i = 0 ;i < len; i++){
             byte[] chunk = Arrays.copyOfRange(data, i * Configuration.CHUNK_SIZE, (i + 1) * Configuration.CHUNK_SIZE);

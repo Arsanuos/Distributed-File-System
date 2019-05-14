@@ -19,6 +19,7 @@ public class FileHandler {
     private static void writeFile(File file, byte[] data) throws IOException {
         FileOutputStream fio = new FileOutputStream(file);
         fio.write(data);
+        fio.flush();
         fio.close();
 
     }
