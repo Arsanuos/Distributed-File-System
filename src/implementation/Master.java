@@ -17,15 +17,17 @@ public class Master implements MasterServerClientInterface {
     private Map<String, ReplicaLoc> primaryReplica;
     private Map<String, List<ReplicaLoc>> replicaLocations;
     private List<ReplicaLoc> replicaLocs;
-    private List<ReplicaServer> replicaServers;
+    private List<ReplicaServerMasterInterface> replicaServers;
     private long txID;
-    private Registry registry;
 
     private static final int  port = 8080;
     private static final String addr = "localhost";
 
+    public Master(){
 
-    public Master(List<ReplicaServer> replicaServers, List<ReplicaLoc> replicaLocs){
+    }
+
+    public void add_replicas(List<ReplicaServerMasterInterface> replicaServers, List<ReplicaLoc> replicaLocs){
 
         this.replicaLocs = replicaLocs;
         this.replicaServers = replicaServers;
@@ -38,7 +40,7 @@ public class Master implements MasterServerClientInterface {
             public void run() {
                 for(int i = 0 ;i < replicaServers.size(); i++){
                     try {
-                        ReplicaServer server = replicaServers.get(i);
+                        ReplicaServerMasterInterface server = replicaServers.get(i);
                         server.isAlive();
                     } catch (RemoteException e) {
                         replicaLocs.get(i).setAlive(false);
@@ -49,13 +51,6 @@ public class Master implements MasterServerClientInterface {
         };
         Timer timer = new Timer();
         timer.schedule(heartBeat, 10, 3000);
-
-        try {
-            registry = LocateRegistry.getRegistry(addr, port);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
@@ -84,7 +79,7 @@ public class Master implements MasterServerClientInterface {
         List<ReplicaLoc> sampled_loc = replicaLocs;
         replicaLocations.put(data.getFileName(), sampled_loc);
         ReplicaLoc prime = sampled_loc.get(0);
-        ReplicaServerMasterInterface inter = (ReplicaServerMasterInterface) registry.lookup("Replica"+prime.getId());
+        ReplicaServerMasterInterface inter = replicaServers.get(prime.getId());
         inter.take_charge(data.getFileName(), sampled_loc);
         return write(data);
     }
