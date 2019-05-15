@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="669d3af4-912c-43fe-a179-c4df49f230d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/AckMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AckMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/FileContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/FileContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/Master.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/Master.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/MessageNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/MessageNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/ReplicaServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/implementation/ReplicaServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/implementation/WriteMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/WriteMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/MasterServerClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/MasterServerClientInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ReplicaServerClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ReplicaServerClientInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,19 +31,7 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/Client.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="125">
-              <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
+              <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -42,16 +40,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+            <state relative-caret-position="-580">
+              <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/MessageNotFoundException.java">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="650">
+              <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/MessageNotFoundException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
               <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
@@ -63,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/ReplicaServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
-              <caret line="79" column="44" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
+              <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,7 +88,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/implementation/FileHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/utils/FileHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
               <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
@@ -111,7 +118,7 @@
         <entry file="file://$PROJECT_DIR$/src/implementation/Master.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
+              <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,8 +166,8 @@
         <option value="$PROJECT_DIR$/src/implementation/ReplicaServer.java" />
         <option value="$PROJECT_DIR$/src/implementation/MessageNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/implementation/FileHandler.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -182,6 +189,11 @@
             <path>
               <item name="Distributed-File-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="Distributed-File-System" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Distributed-File-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Distributed-File-System" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -254,12 +266,12 @@
       <workItem from="1557842111961" duration="6203000" />
       <workItem from="1557850102676" duration="745000" />
       <workItem from="1557863474814" duration="6552000" />
-      <workItem from="1557912974066" duration="2145000" />
+      <workItem from="1557912974066" duration="3444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49733000" />
+    <option name="totallyTimeSpent" value="51032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -270,7 +282,7 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.27919462" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.27919462" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Version Control" order="0" sideWeight="0.49798658" weight="0.3286119" />
@@ -280,7 +292,7 @@
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.4966443" visible="true" weight="0.32719547" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4966443" visible="true" weight="0.32719547" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -344,7 +356,7 @@
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/rmi/Remote.java" />
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Arrays.java" />
     <entry file="file://$PROJECT_DIR$/src/interfaces/ReplicaClientInterface.java" />
-    <entry file="file://$PROJECT_DIR$/src/implementation/AckMsg.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/AckMsg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
@@ -352,7 +364,7 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/function/ToLongFunction.java" />
-    <entry file="file://$PROJECT_DIR$/src/implementation/WriteMsg.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/WriteMsg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
@@ -373,7 +385,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/Configuration.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
@@ -400,7 +412,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/FileContent.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/FileContent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
@@ -428,14 +440,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/MessageNotFoundException.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/MessageNotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/implementation/FileHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/FileHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
@@ -445,7 +457,7 @@
     <entry file="file://$PROJECT_DIR$/src/implementation/ReplicaServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="79" column="44" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
+          <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -455,7 +467,7 @@
     <entry file="file://$PROJECT_DIR$/src/implementation/Master.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
+          <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -465,17 +477,7 @@
     <entry file="file://$PROJECT_DIR$/src/implementation/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
-          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="100" column="49" selection-start-line="100" selection-start-column="49" selection-end-line="100" selection-end-column="49" />
+          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -484,8 +486,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+        <state relative-caret-position="650">
+          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-580">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
         </state>
       </provider>
     </entry>

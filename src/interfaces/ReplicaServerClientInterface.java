@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import implementation.FileContent;
-import implementation.MessageNotFoundException;
-import implementation.WriteMsg;
+import utils.FileContent;
+import utils.MessageNotFoundException;
+import utils.WriteMsg;
 
 public interface ReplicaServerClientInterface extends Remote {
 	/**

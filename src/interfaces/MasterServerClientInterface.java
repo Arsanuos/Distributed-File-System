@@ -1,8 +1,8 @@
 package interfaces;
 
-import implementation.FileContent;
+import utils.FileContent;
 import implementation.ReplicaLoc;
-import implementation.WriteMsg;
+import utils.WriteMsg;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package implementation;
+package utils;
 
 public class Configuration {
 
