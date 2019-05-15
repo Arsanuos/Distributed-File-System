@@ -7,7 +7,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public interface ReplicaServerMasterInterface extends Remote {
+public interface ReplicaMasterInterface extends Remote {
 
     public boolean isAlive() throws RemoteException;
 

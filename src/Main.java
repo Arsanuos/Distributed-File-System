@@ -1,6 +1,6 @@
 import implementation.*;
-import interfaces.MasterServerClientInterface;
-import interfaces.ReplicaServerClientInterface;
+import interfaces.MasterClientInterface;
+import interfaces.ReplicaClientInterface;
 import utils.Configuration;
 import utils.FileContent;
 import utils.MessageNotFoundException;
@@ -18,7 +18,7 @@ import java.util.List;
 public class Main {
 
     private static Master master;
-    private static List<ReplicaServer> replicaServers;
+    private static List<Replica> replicaServers;
     private static List<ReplicaLoc> replicaLocs;
     private static Registry registry;
 
@@ -35,7 +35,7 @@ public class Main {
     private static void startMaster() throws RemoteException, AlreadyBoundException {
 
         master = new Master(replicaServers, replicaLocs);
-        MasterServerClientInterface stub = (MasterServerClientInterface) UnicastRemoteObject.exportObject(master, Configuration.REG_PORT);
+        MasterClientInterface stub = (MasterClientInterface) UnicastRemoteObject.exportObject(master, Configuration.REG_PORT);
         registry.bind("Master", master);
     }
 
@@ -50,9 +50,9 @@ public class Main {
         for (int i = 0; i < n; i++) {
             s = br.readLine().trim();
             replicaLoc = new ReplicaLoc(i,  s, true);
-            ReplicaServer rs = new ReplicaServer(i, s);
+            Replica rs = new Replica(i, s);
 
-            ReplicaServerClientInterface stub = (ReplicaServerClientInterface) UnicastRemoteObject.exportObject(rs, Configuration.REG_PORT);
+            ReplicaClientInterface stub = (ReplicaClientInterface) UnicastRemoteObject.exportObject(rs, Configuration.REG_PORT);
 
             registry.rebind("Replica" + i, rs);
 

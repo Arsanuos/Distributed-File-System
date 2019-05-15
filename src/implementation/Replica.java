@@ -1,8 +1,8 @@
 package implementation;
 
 import interfaces.ReplicaReplicaInterface;
-import interfaces.ReplicaServerClientInterface;
-import interfaces.ReplicaServerMasterInterface;
+import interfaces.ReplicaClientInterface;
+import interfaces.ReplicaMasterInterface;
 import utils.*;
 
 import java.io.*;
@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServerMasterInterface,
+public class Replica implements ReplicaClientInterface, ReplicaMasterInterface,
         ReplicaReplicaInterface {
 
     private int id;
@@ -30,7 +30,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
     private Map<Long, String> txn_filename;
     private ConcurrentMap<String, ReentrantReadWriteLock> lock_manager;
 
-    public ReplicaServer(int id, String addr){
+    public Replica(int id, String addr){
         this.id = id;
         this.dir = "./replica-" + id;
         this.addr = addr;

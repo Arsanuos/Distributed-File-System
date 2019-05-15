@@ -1,7 +1,7 @@
 package implementation;
 
-import interfaces.MasterServerClientInterface;
-import interfaces.ReplicaServerMasterInterface;
+import interfaces.MasterClientInterface;
+import interfaces.ReplicaMasterInterface;
 import utils.Configuration;
 import utils.FileContent;
 import utils.WriteMsg;
@@ -14,13 +14,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.*;
 
-public class Master implements MasterServerClientInterface {
+public class Master implements MasterClientInterface {
 
 
     private Map<String, ReplicaLoc> primaryReplica;
     private Map<String, List<ReplicaLoc>> replicaLocations;
     private List<ReplicaLoc> replicaLocs;
-    private List<ReplicaServer> replicaServers;
+    private List<Replica> replicaServers;
     private long txID;
     private Registry registry;
     private static final int sample_size = 3;
@@ -28,7 +28,7 @@ public class Master implements MasterServerClientInterface {
 
 
 
-    public Master(List<ReplicaServer> replicaServers, List<ReplicaLoc> replicaLocs){
+    public Master(List<Replica> replicaServers, List<ReplicaLoc> replicaLocs){
 
         this.replicaLocs = replicaLocs;
         this.replicaServers = replicaServers;
@@ -41,7 +41,7 @@ public class Master implements MasterServerClientInterface {
             public void run() {
                 for(int i = 0 ;i < replicaServers.size(); i++){
                     try {
-                        ReplicaServer server = replicaServers.get(i);
+                        Replica server = replicaServers.get(i);
                         server.isAlive();
                     } catch (RemoteException e) {
                         replicaLocs.get(i).setAlive(false);
@@ -62,13 +62,13 @@ public class Master implements MasterServerClientInterface {
     }
 
     @Override
-    public ReplicaLoc[] read(String fileName) throws IOException, RemoteException {
+    public ReplicaLoc read(String fileName) throws IOException, RemoteException {
         if(!this.replicaLocations.containsKey(fileName)){
             throw new FileNotFoundException();
         }
         List<ReplicaLoc> locs = this.replicaLocations.get(fileName);
         ReplicaLoc[] locations = locs.toArray(new ReplicaLoc[locs.size()]);
-        return locations;
+        return locations[0];
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Master implements MasterServerClientInterface {
         List<ReplicaLoc> sampled_loc = sample_locs(replicaLocs);
         replicaLocations.put(data.getFileName(), sampled_loc);
         ReplicaLoc prime = sampled_loc.get(0);
-        ReplicaServerMasterInterface inter = (ReplicaServerMasterInterface) registry.lookup("Replica"+prime.getId());
+        ReplicaMasterInterface inter = (ReplicaMasterInterface) registry.lookup("Replica"+prime.getId());
         inter.take_charge(data.getFileName(), sampled_loc);
         return write(data);
     }

@@ -1,7 +1,7 @@
 package implementation;
 
-import interfaces.MasterServerClientInterface;
-import interfaces.ReplicaServerClientInterface;
+import interfaces.MasterClientInterface;
+import interfaces.ReplicaClientInterface;
 import utils.Configuration;
 import utils.FileContent;
 import utils.MessageNotFoundException;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class Client {
 
-    private MasterServerClientInterface master;
+    private MasterClientInterface master;
 
     public Client(){
         try {
@@ -23,7 +23,7 @@ public class Client {
             Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
 
             // Looking up the registry for the remote object
-            this.master = (MasterServerClientInterface) registry.lookup("Master");
+            this.master = (MasterClientInterface) registry.lookup("Master");
 
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
@@ -32,14 +32,14 @@ public class Client {
     }
 
     public byte[] read(String fileName) throws IOException, NotBoundException {
-        ReplicaLoc[] locations = master.read(fileName);
+        ReplicaLoc location = master.read(fileName);
 
         // get replication.
-        ReplicaLoc replica = locations[0];
+        ReplicaLoc replica = location;
 
         //get the server itself.
         Registry registry = LocateRegistry.getRegistry(replica.getAddress(), Configuration.REG_PORT);
-        ReplicaServerClientInterface replicaServer = (ReplicaServerClientInterface) registry.lookup("Replica" + replica.getId());
+        ReplicaClientInterface replicaServer = (ReplicaClientInterface) registry.lookup("Replica" + replica.getId());
 
         FileContent fileContent = replicaServer.read(fileName);
 
@@ -53,7 +53,7 @@ public class Client {
 
         //get the server itself.
         Registry registry = LocateRegistry.getRegistry(Configuration.REG_PORT);
-        ReplicaServerClientInterface replicaServer = (ReplicaServerClientInterface) registry.lookup("Replica" + replicaLoc.getId());
+        ReplicaClientInterface replicaServer = (ReplicaClientInterface) registry.lookup("Replica" + replicaLoc.getId());
 
         byte[] data = fileContent.getData();
         int len = (int) Math.floor(1.0 * fileContent.getData().length/Configuration.CHUNK_SIZE);
