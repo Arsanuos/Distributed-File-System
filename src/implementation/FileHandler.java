@@ -7,6 +7,9 @@ public class FileHandler {
     public static byte[] read(String fileName) throws IOException {
         File file = new File(fileName);
 
+        if (!file.exists()){
+            return null;
+        }
         // Using java.io.FileInputStream
         return readFileToByteArray(file);
     }

@@ -22,6 +22,7 @@ public class ReplicaServer implements ReplicaServerClientInterface, ReplicaServe
     private String addr;
     private Registry registry;
     private Map<Long, Map<Long, FileContent>> uncommittedFile;
+
     // this map is used to map from filename to slaves replicas
     private Map<String, List<ReplicaReplicaInterface>> slavesReplicas;
     private Map<Integer, ReplicaReplicaInterface> current_stubs;

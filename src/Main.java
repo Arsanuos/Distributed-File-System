@@ -61,6 +61,8 @@ public class Main {
 
     private static void startClient(){
         try {
+
+            /******************Test on file 1********************/
             Client c = new Client();
             char[] ss = "File 1 test test END ".toCharArray();
             byte[] data = new byte[ss.length];
@@ -69,30 +71,44 @@ public class Main {
 
             c.write(new FileContent("file1.txt", data));
             byte[] ret = c.read("file1.txt");
-            System.out.println("file1.txt: " + new String(ret));
-        /*
+            handle_read("file1.txt", ret);
+
+
+            /******************Test on file 1********************/
             c = new Client();
             ss = "File 1 Again Again END ".toCharArray();
             data = new byte[ss.length];
             for (int i = 0; i < ss.length; i++)
                 data[i] = (byte) ss[i];
 
-            c.write(new FileContent("file1", data));
-            ret = c.read("file1");
-            System.out.println("file1: " + ret);
+            c.write(new FileContent("file1.txt", data));
+            ret = c.read("file1.txt");
+            handle_read("file1.txt", ret);
 
+
+            /*******************Test on file 2****************/
             c = new Client();
             ss = "File 2 test test END ".toCharArray();
             data = new byte[ss.length];
             for (int i = 0; i < ss.length; i++)
                 data[i] = (byte) ss[i];
 
-            c.write(new FileContent("file1", data));
-            ret = c.read("file2");
-            System.out.println("file2: " + ret);
-        */
+            c.write(new FileContent("file1.txt", data));
+            ret = c.read("file2.txt");
+            handle_read("file2.txt", ret);
+
+
         } catch (NotBoundException | IOException | MessageNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("File isn't found");
+            //e.printStackTrace();
+        }
+    }
+    private static void handle_read(String filename, byte[] ret){
+        if(ret == null){
+            // file not found
+            System.out.println("File not found!");
+        }else {
+            System.out.println(filename + ": " + new String(ret));
         }
     }
 
