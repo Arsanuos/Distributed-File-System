@@ -31,10 +31,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException, AlreadyBoundException {
 
-        registry = LocateRegistry.createRegistry(Configuration.REG_PORT);
+        if(args.length  == 2){
+            Configuration.REG_ADDR = args[0];
+            Configuration.REG_PORT = Integer.parseInt(args[1]);
+        }
 
+        registry = LocateRegistry.createRegistry(Configuration.REG_PORT);
         getReplica();
         startMaster();
+
         /*
         testOneFile();
         testThreeFiles();

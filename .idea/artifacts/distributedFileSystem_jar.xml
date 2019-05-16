@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="distributedFileSystem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/distributedFileSystem_jar</output-path>
+    <root id="archive" name="distributedFileSystem.jar">
+      <element id="module-output" name="distributedFileSystem" />
+    </root>
+  </artifact>
+</component>
