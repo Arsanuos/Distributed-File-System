@@ -108,6 +108,7 @@ public class Replica implements ReplicaClientInterface, ReplicaMasterInterface,
         }
 
 
+
         Map<Long, FileContent> tmp = this.uncommittedFile.get(txnID);
         List<Map.Entry<Long, FileContent>> sortedList = getSortedActions(tmp);
 
@@ -117,20 +118,19 @@ public class Replica implements ReplicaClientInterface, ReplicaMasterInterface,
         String filename = txn_filename.get(txnID);
         List<ReplicaReplicaInterface> slaves = slavesReplicas.get(filename);
 
+
         for (ReplicaReplicaInterface slave: slaves){
-            boolean done = slave.reflect_data(filename, data);
+            boolean done = slave.reflect_data(filename, data, txnID);
             if (!done){
                 // error, not handled yet
             }
         }
-        boolean primary_done = reflect_data(filename, data);
 
-        // unlock primary
-        release_file_locks(filename);
+
 
         // unlock slaves
         for(ReplicaReplicaInterface slave: slaves){
-            slave.release_file_locks(filename);
+            slave.release_file_locks(filename, txnID);
         }
         return true;
     }
@@ -181,21 +181,22 @@ public class Replica implements ReplicaClientInterface, ReplicaMasterInterface,
 
 
     @Override
-    public boolean reflect_data(String filename, byte[] data) throws IOException {
+    public boolean reflect_data(String filename, byte[] data, long txnID) throws IOException {
         // tell the slave to write their copy on the hard disk
         lock_manager.putIfAbsent(filename, new ReentrantReadWriteLock());
+
         ReentrantReadWriteLock lock = lock_manager.get(filename);
 
         lock.writeLock().lock(); // don't release lock here .. making sure coming reads can't proceed
+        System.out.println("committing" + (txnID + 1));
         FileHandler.write(dir + File.separator + filename, data);
+        lock.writeLock().unlock();
         return true;
     }
 
     @Override
-    public boolean release_file_locks(String filename) {
+    public boolean release_file_locks(String filename, long txnID) {
         // tell the slaves to release the locks of that file
-        ReentrantReadWriteLock lock = lock_manager.get(filename);
-        lock.writeLock().unlock();
         return false;
     }
 }

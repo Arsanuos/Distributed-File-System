@@ -72,7 +72,6 @@ public class Master implements MasterClientInterface {
 
     @Override
     public WriteMsg write(FileContent data) throws RemoteException, IOException, NotBoundException {
-        // Replica must know the other replicas (How?).
         if(replicaLocations.containsKey(data.getFileName())){
             // fill already handled by primary replica
             List<ReplicaLoc> locs = this.replicaLocations.get(data.getFileName());
@@ -84,10 +83,10 @@ public class Master implements MasterClientInterface {
 
         // sample from ReplicLoc
         List<ReplicaLoc> sampled_loc = sample_locs(replicaLocs);
-        replicaLocations.put(data.getFileName(), sampled_loc);
         ReplicaLoc prime = sampled_loc.get(0);
         ReplicaMasterInterface inter = (ReplicaMasterInterface) registry.lookup("Replica"+prime.getId());
         inter.take_charge(data.getFileName(), sampled_loc);
+        replicaLocations.put(data.getFileName(), sampled_loc);
         return write(data);
     }
 

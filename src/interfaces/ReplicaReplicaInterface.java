@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ReplicaReplicaInterface extends Remote {
 
-    public boolean reflect_data(String filename, byte[] data) throws IOException, RemoteException;
+    public boolean reflect_data(String filename, byte[] data, long txnID) throws IOException, RemoteException;
 
-    public boolean release_file_locks(String filename) throws RemoteException;
+    public boolean release_file_locks(String filename, long txnID) throws RemoteException;
 
 
 }

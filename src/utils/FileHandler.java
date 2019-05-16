@@ -20,11 +20,10 @@ public class FileHandler {
     }
 
     private static void writeFile(File file, byte[] data) throws IOException {
-        FileOutputStream fio = new FileOutputStream(file);
+        FileOutputStream fio = new FileOutputStream(file, true);
         fio.write(data);
         fio.flush();
         fio.close();
-
     }
 
 
