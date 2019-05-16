@@ -29,7 +29,8 @@ public class Main {
 
         getReplica();
         startMaster();
-        startClient();
+        testOneFile();
+        testThreeFiles();
     }
 
     private static void startMaster() throws RemoteException, AlreadyBoundException {
@@ -62,49 +63,38 @@ public class Main {
         br.close();
     }
 
-    private static void startClient(){
+    private static void writeFile(String fileName, String str){
         try {
-
-            /******************Test on file 1********************/
             Client c = new Client();
-            char[] ss = "File 1 test test END ".toCharArray();
+            char[] ss = str.toCharArray();
             byte[] data = new byte[ss.length];
             for (int i = 0; i < ss.length; i++)
                 data[i] = (byte) ss[i];
 
-            c.write(new FileContent("file1.txt", data));
-            byte[] ret = c.read("file1.txt");
-            handle_read("file1.txt", ret);
-
-
-            /******************Test on file 1********************/
-            c = new Client();
-            ss = "File 1 Again Again END ".toCharArray();
-            data = new byte[ss.length];
-            for (int i = 0; i < ss.length; i++)
-                data[i] = (byte) ss[i];
-
-            c.write(new FileContent("file1.txt", data));
-            ret = c.read("file1.txt");
-            handle_read("file1.txt", ret);
-
-
-            /*******************Test on file 2****************/
-            c = new Client();
-            ss = "File 2 test test END ".toCharArray();
-            data = new byte[ss.length];
-            for (int i = 0; i < ss.length; i++)
-                data[i] = (byte) ss[i];
-
-            c.write(new FileContent("file1.txt", data));
-            ret = c.read("file2.txt");
-            handle_read("file2.txt", ret);
-
-
-        } catch (NotBoundException | IOException | MessageNotFoundException e) {
-            System.err.println("File isn't found");
-            //e.printStackTrace();
+            c.write(new FileContent(fileName, data));
+            handle_read(fileName, c.read(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MessageNotFoundException e) {
+            e.printStackTrace();
         }
+    }
+
+    private static void testOneFile(){
+        writeFile("File1.txt", "Test aloo aloo aloo.");
+    }
+
+    private static void testThreeFiles(){
+        /******************Test on file 1********************/
+        writeFile("File2.txt", "test2 test test test");
+
+        /******************Test on file 1********************/
+        writeFile("File3.txt", "test3 test test test aloooooooo");
+
+        /*******************Test on file 2****************/
+        writeFile("File4.txt", "test2 test test test");
     }
     private static void handle_read(String filename, byte[] ret){
         if(ret == null){

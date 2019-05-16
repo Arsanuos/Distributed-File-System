@@ -23,7 +23,6 @@ public class Master implements MasterClientInterface {
     private List<Replica> replicaServers;
     private long txID;
     private Registry registry;
-    private static final int sample_size = 3;
 
 
 
@@ -93,16 +92,16 @@ public class Master implements MasterClientInterface {
     }
 
     private List<ReplicaLoc> sample_locs(List<ReplicaLoc> total_locs){
-        if(total_locs.size() <= sample_size){
+        if(total_locs.size() <= Configuration.NUM_REPLICA){
             return total_locs;
         }
         int sz = total_locs.size();
         Random random = new Random();
         ReplicaLoc primary = total_locs.get(random.nextInt(sz));
-        List<ReplicaLoc> sampled_locs = new ArrayList<>(sample_size);
+        List<ReplicaLoc> sampled_locs = new ArrayList<>(Configuration.NUM_REPLICA);
         sampled_locs.add(0, primary);
 
-        for(int i = 1 ; i < sample_size; i++){
+        for(int i = 1 ; i < Configuration.NUM_REPLICA; i++){
             ReplicaLoc replica = total_locs.get(random.nextInt(sz));
             if(replica.getId() == primary.getId()){
                 // redo the loop again
